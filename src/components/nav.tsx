@@ -37,7 +37,6 @@ export default function Nav() {
     const [prevPath, setPrevPath] = useState(pathname);
     const [isInitialized, setIsInitialized] = useState(false);
     const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-    const navContainerRef = useRef<HTMLDivElement>(null);
     const animationTimer = useRef<NodeJS.Timeout | null>(null);
 
     // Handle client-side mounting
@@ -45,20 +44,20 @@ export default function Nav() {
         setIsMounted(true);
     }, []);
 
-    // Function to update bird position relative to nav container
+    // Function to update bird position relative to first nav item
     const updateBirdPosition = () => {
         const activeIndex = links.findIndex(link => link.path === pathname);
         const targetIndex = activeIndex !== -1 ? activeIndex : 0;
         
-        const navElement = navRefs.current[targetIndex];
-        const container = navContainerRef.current;
+        const activeElement = navRefs.current[targetIndex];
+        const firstElement = navRefs.current[0];
         
-        if (navElement && container) {
-            const navRect = navElement.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
+        if (activeElement && firstElement) {
+            const activeRect = activeElement.getBoundingClientRect();
+            const firstRect = firstElement.getBoundingClientRect();
             
             setBirdOffset({
-                x: navRect.left - containerRect.left + navRect.width / 2 - 20,
+                x: activeRect.left - firstRect.left + activeRect.width / 2 - 20,
                 y: -40,
             });
         }
@@ -99,24 +98,21 @@ export default function Nav() {
     }, [pathname, prevPath, isInitialized]);
 
   return (
-    <div ref={navContainerRef} className='relative' suppressHydrationWarning>
-      <nav className='flex gap-8'>
-          {links.map((link, index) => (
-              <Link
-                  href={link.path}
-                  key={index}
-                  ref={(el) => { navRefs.current[index] = el; }}
-                  className={`${
-                      link.path === pathname && "text-accent"
-                  } capitalize font-medium hover:text-accent transition-all relative z-10`}
-              >
-                  {link.name}
-              </Link>
-          ))}
-      </nav>
+    <nav className='flex gap-8 relative'>
+        {links.map((link, index) => (
+            <Link
+                href={link.path}
+                key={index}
+                ref={(el) => { navRefs.current[index] = el; }}
+                className={`${
+                    link.path === pathname && "text-accent"
+                } capitalize font-medium hover:text-accent transition-all relative z-10`}
+            >
+                {link.name}
+            </Link>
+        ))}
 
-      {/* Swift Bird - Stays on active nav item */}
-      {isMounted && (
+        {/* Swift Bird - Stays on active nav item */}
         <motion.div
           key={pathname}
           className="absolute pointer-events-none"
@@ -124,6 +120,7 @@ export default function Nav() {
             zIndex: 1000,
             left: 0,
             top: 0,
+            opacity: isMounted ? 1 : 0,
           }}
           initial={false}
           animate={{
@@ -145,7 +142,6 @@ export default function Nav() {
               isAnimating={isAnimating}
             />
           </motion.div>
-        )}
-    </div>
+    </nav>
   )
 }
