@@ -74,8 +74,8 @@ export default function Nav() {
                 const rect = element?.getBoundingClientRect();
                 if (rect) {
                     setBirdPosition({
-                        x: rect.left + rect.width / 2 - 15,
-                        y: rect.top - 35,
+                        x: rect.left + rect.width / 2 - 20,
+                        y: rect.top - 40,
                     });
                 }
             }
@@ -133,10 +133,11 @@ export default function Nav() {
 
             {/* Swift Bird */}
             <motion.svg
-              width="30px"
-              height="30px"
-              viewBox="0 0 24 24"
+              width="40px"
+              height="40px"
+              viewBox="-3.2 -3.2 38.40 38.40"
               xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
               className="relative"
               animate={isAnimating ? {
                 rotate: [0, -10, 5, 0],
@@ -147,15 +148,18 @@ export default function Nav() {
                 ease: "easeInOut",
               }}
             >
+              <defs>
+                <linearGradient id="swift-gradient" x1="-134.494" y1="-171.82" x2="-134.497" y2="-171.89" gradientTransform="matrix(240, 0, 0, -205.6, 32295, -35312.585)" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stopColor="#f88535"></stop>
+                  <stop offset="1" stopColor="#fd2221"></stop>
+                </linearGradient>
+              </defs>
               <motion.path
-                d="M17.09,19.72a9.92,9.92,0,0,1-8.86.1A13.81,13.81,0,0,1,2,14.5a11.2,11.2,0,0,0,2.3,1.4c3.37,1.57,6.73,1.46,9.1,0A48.49,48.49,0,0,1,5,7.19,10,10,0,0,1,3.91,5.68c8.28,6.05,7.92,7.59,2.41-1a57,57,0,0,0,9.43,7.74l.36.22a6.48,6.48,0,0,0,.26-.78A10.53,10.53,0,0,0,14.29,3c4.55,2.75,7.25,7.91,6.12,12.24a1.09,1.09,0,0,0-.05.39c2.24,2.83,1.64,5.78,1.35,5.22-1.21-2.39-3.48-1.65-4.62-1.17Z"
-                fill="var(--accent)"
+                d="M19.422,4.007s6.217,3.554,7.844,9.2c1.466,5.1.292,7.534.292,7.534a8.915,8.915,0,0,1,1.742,2.8,4.825,4.825,0,0,1,.29,4.453s-.1-2.08-3.2-2.511c-2.841-.4-3.874,2.366-9.3,2.232A18.435,18.435,0,0,1,2,19.354C4.651,20.8,8.124,23.045,12.449,22.7s5.228-1.674,5.228-1.674A66.9,66.9,0,0,1,4.891,7.643c3.4,2.845,11.822,8.507,11.626,8.363A75.826,75.826,0,0,1,8.092,6.24S20.728,16.629,21.745,16.563c.418-.861,2.579-5.318-2.324-12.557Z"
+                fill="url(#swift-gradient)"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                style={{
-                  filter: "drop-shadow(0 0 8px var(--accent))",
-                }}
               />
             </motion.svg>
 
