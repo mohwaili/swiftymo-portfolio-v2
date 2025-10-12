@@ -37,7 +37,7 @@ export default function Nav() {
     const [prevPath, setPrevPath] = useState(pathname);
     const [isInitialized, setIsInitialized] = useState(false);
     const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-    const navContainerRef = useRef<HTMLElement>(null);
+    const navContainerRef = useRef<HTMLDivElement>(null);
     const animationTimer = useRef<NodeJS.Timeout | null>(null);
 
     // Handle client-side mounting
@@ -99,51 +99,53 @@ export default function Nav() {
     }, [pathname, prevPath, isInitialized]);
 
   return (
-    <nav ref={navContainerRef} className='flex gap-8 relative'>
-        {links.map((link, index) => (
-            <Link
-                href={link.path}
-                key={index}
-                ref={(el) => { navRefs.current[index] = el; }}
-                className={`${
-                    link.path === pathname && "text-accent"
-                } capitalize font-medium hover:text-accent transition-all relative z-10`}
-            >
-                {link.name}
-            </Link>
-        ))}
+    <div ref={navContainerRef} className='relative' suppressHydrationWarning>
+      <nav className='flex gap-8'>
+          {links.map((link, index) => (
+              <Link
+                  href={link.path}
+                  key={index}
+                  ref={(el) => { navRefs.current[index] = el; }}
+                  className={`${
+                      link.path === pathname && "text-accent"
+                  } capitalize font-medium hover:text-accent transition-all relative z-10`}
+              >
+                  {link.name}
+              </Link>
+          ))}
+      </nav>
 
-        {/* Swift Bird - Stays on active nav item */}
-        {isMounted && (
-          <motion.div
-            key={pathname}
-            className="absolute pointer-events-none"
-            style={{
-              zIndex: 1000,
-              left: 0,
-              top: 0,
-            }}
-            initial={false}
-            animate={{
-              x: birdOffset.x,
-              y: birdOffset.y,
-              scale: isAnimating ? [0, 1.5, 0.8, 0.6] : 0.6,
-              rotate: isAnimating ? [-180, 0, 10, 0] : 0,
-            }}
-            transition={{
-              duration: isAnimating ? 0.8 : 0.3,
-              ease: [0.34, 1.56, 0.64, 1],
-            }}
-          >
-              <SwiftBirdLogo 
-                width="40px" 
-                height="40px" 
-                gradientId="swift-gradient-nav"
-                animate={true}
-                isAnimating={isAnimating}
-              />
-            </motion.div>
-          )}
-    </nav>
+      {/* Swift Bird - Stays on active nav item */}
+      {isMounted && (
+        <motion.div
+          key={pathname}
+          className="absolute pointer-events-none"
+          style={{
+            zIndex: 1000,
+            left: 0,
+            top: 0,
+          }}
+          initial={false}
+          animate={{
+            x: birdOffset.x,
+            y: birdOffset.y,
+            scale: isAnimating ? [0, 1.5, 0.8, 0.6] : 0.6,
+            rotate: isAnimating ? [-180, 0, 10, 0] : 0,
+          }}
+          transition={{
+            duration: isAnimating ? 0.8 : 0.3,
+            ease: [0.34, 1.56, 0.64, 1],
+          }}
+        >
+            <SwiftBirdLogo 
+              width="40px" 
+              height="40px" 
+              gradientId="swift-gradient-nav"
+              animate={true}
+              isAnimating={isAnimating}
+            />
+          </motion.div>
+        )}
+    </div>
   )
 }
