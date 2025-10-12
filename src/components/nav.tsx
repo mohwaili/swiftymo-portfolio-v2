@@ -112,6 +112,7 @@ export default function Nav() {
       {/* Swift Bird - Stays on active nav item */}
       {showBird && (
         <motion.div
+          key={pathname}
           className="fixed pointer-events-none"
           style={{
             zIndex: 1000,
@@ -157,9 +158,6 @@ export default function Nav() {
               <motion.path
                 d="M19.422,4.007s6.217,3.554,7.844,9.2c1.466,5.1.292,7.534.292,7.534a8.915,8.915,0,0,1,1.742,2.8,4.825,4.825,0,0,1,.29,4.453s-.1-2.08-3.2-2.511c-2.841-.4-3.874,2.366-9.3,2.232A18.435,18.435,0,0,1,2,19.354C4.651,20.8,8.124,23.045,12.449,22.7s5.228-1.674,5.228-1.674A66.9,66.9,0,0,1,4.891,7.643c3.4,2.845,11.822,8.507,11.626,8.363A75.826,75.826,0,0,1,8.092,6.24S20.728,16.629,21.745,16.563c.418-.861,2.579-5.318-2.324-12.557Z"
                 fill="url(#swift-gradient)"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
               />
             </motion.svg>
 
