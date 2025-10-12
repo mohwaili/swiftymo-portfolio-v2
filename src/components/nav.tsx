@@ -34,10 +34,38 @@ export default function Nav() {
     const [showBird, setShowBird] = useState(true);
     const [birdPosition, setBirdPosition] = useState({ x: 0, y: 0 });
     const [prevPath, setPrevPath] = useState(pathname);
+    const [isInitialized, setIsInitialized] = useState(false);
     const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+    const animationTimer = useRef<NodeJS.Timeout | null>(null);
 
+    // Initialize bird position on mount
     useEffect(() => {
-        if (prevPath !== pathname) {
+        if (!isInitialized && navRefs.current[0]) {
+            const activeIndex = links.findIndex(link => link.path === pathname);
+            const targetIndex = activeIndex !== -1 ? activeIndex : 0;
+            
+            const element = navRefs.current[targetIndex];
+            const rect = element?.getBoundingClientRect();
+            if (rect) {
+                setBirdPosition({
+                    x: rect.left + rect.width / 2 - 15,
+                    y: rect.top - 35,
+                });
+                setIsInitialized(true);
+            }
+        }
+    }, [navRefs.current[0], isInitialized, pathname]);
+
+    // Handle path changes
+    useEffect(() => {
+        if (isInitialized && prevPath !== pathname) {
+            // Clear any existing timer to allow interruption
+            if (animationTimer.current) {
+                clearTimeout(animationTimer.current);
+            }
+            
+            // Update prevPath immediately to allow quick successive clicks
+            setPrevPath(pathname);
             setIsAnimating(true);
             
             const activeIndex = links.findIndex(link => link.path === pathname);
@@ -46,20 +74,23 @@ export default function Nav() {
                 const rect = element?.getBoundingClientRect();
                 if (rect) {
                     setBirdPosition({
-                        x: rect.left + rect.width / 2 - 15, // Center the bird
-                        y: rect.top - 35, // Position above the text
+                        x: rect.left + rect.width / 2 - 15,
+                        y: rect.top - 35,
                     });
                 }
             }
 
-            const timer = setTimeout(() => {
+            animationTimer.current = setTimeout(() => {
                 setIsAnimating(false);
-                setPrevPath(pathname);
-            }, 1000);
+            }, 800);
             
-            return () => clearTimeout(timer);
+            return () => {
+                if (animationTimer.current) {
+                    clearTimeout(animationTimer.current);
+                }
+            };
         }
-    }, [pathname, prevPath]);
+    }, [pathname, prevPath, isInitialized]);
 
   return (
     <>
