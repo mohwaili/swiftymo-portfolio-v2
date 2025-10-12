@@ -10,18 +10,28 @@ export default function PageTransition({
 }) {
   const pathname = usePathname();
   return (
-    <AnimatePresence>
-      <div key={pathname}>
-        <motion.div
-          initial={{ opacity: 1 }}
-          animate={{
-            opacity: 0,
-            transition: { delay: 1, duration: 0.4, ease: "easeInOut" },
-          }}
-          className="h-screen w-screen fixed bg-primary top-0 pointer-events-none"
-        />
-      </div>
-      {children}
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0 }}
+        animate={{ 
+          opacity: 1,
+          transition: { 
+            duration: 0.3,
+            delay: 0.8, // Delay page content until portal expands
+            ease: "easeOut"
+          }
+        }}
+        exit={{ 
+          opacity: 0,
+          transition: {
+            duration: 0.3,
+            ease: "easeIn"
+          }
+        }}
+      >
+        {children}
+      </motion.div>
     </AnimatePresence>
   );
 }
