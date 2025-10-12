@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div>Work page</div>
+    <div className='container'>Work page</div>
   )
 }
