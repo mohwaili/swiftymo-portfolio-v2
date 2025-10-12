@@ -65,11 +65,14 @@ export default function Nav() {
 
     // Initialize bird position on mount
     useEffect(() => {
-        if (!isInitialized && navRefs.current[0]) {
-            updateBirdPosition();
-            setIsInitialized(true);
+        if (!isInitialized && isMounted && navRefs.current[0]) {
+            // Wait a tick to ensure refs are populated
+            requestAnimationFrame(() => {
+                updateBirdPosition();
+                setIsInitialized(true);
+            });
         }
-    }, [navRefs.current[0], isInitialized, pathname]);
+    }, [isMounted, isInitialized, pathname]);
 
     // Handle path changes
     useEffect(() => {
@@ -120,14 +123,14 @@ export default function Nav() {
             zIndex: 1000,
             left: 0,
             top: 0,
-            opacity: isMounted ? 1 : 0,
+            opacity: isMounted && isInitialized ? 1 : 0,
           }}
           initial={false}
           animate={{
             x: birdOffset.x,
             y: birdOffset.y,
-            scale: isAnimating ? [0, 1.5, 0.8, 0.6] : 0.6,
-            rotate: isAnimating ? [-180, 0, 10, 0] : 0,
+            scale: isAnimating && isInitialized ? [0, 1.5, 0.8, 0.6] : 0.6,
+            rotate: isAnimating && isInitialized ? [-180, 0, 10, 0] : 0,
           }}
           transition={{
             duration: isAnimating ? 0.8 : 0.3,
