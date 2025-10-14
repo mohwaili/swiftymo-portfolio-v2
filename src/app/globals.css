@@ -57,8 +57,8 @@
 :root {
   --radius: 0.625rem;
   --primary: #1c1c22;
-  --accent: #FF6F00;
-  --accent-hover: #C45501;
+  --accent: #cd9f7b;
+  --accent-hover: #9C785D;
 }
 
 @layer base {
@@ -99,4 +99,13 @@
   .border-accent-hover {
     border-color: var(--accent-hover);
   }
+
+  .text-outline {
+    -webkit-text-stroke: 1px #ffffff;
+  }
+  
+  .text-outline-hover {
+    -webkit-text-stroke: 1px var(--accent-hover);
+  }
 }
+
