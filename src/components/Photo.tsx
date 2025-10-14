@@ -5,39 +5,42 @@ import Image from "next/image";
 
 export default function Photo() {
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative flex items-center justify-center perspective-1000">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
           transition: {
             delay: 0.2,
-            duration: 0.4,
-            ease: "easeIn",
+            duration: 0.8,
+            ease: [0.34, 1.56, 0.64, 1],
           },
         }}
+        className="relative w-[298px] h-[298px] xl:w-[498px] xl:h-[498px]"
+        style={{ transformStyle: "preserve-3d" }}
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: {
-              delay: 0.6,
-              duration: 0.4,
-              ease: "easeInOut",
-            },
-          }}
-          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mt-2 xl:mt-6 mix-blend-lighten"
-        >
-          <Image
+        <Image
             src="/assets/photo.jpg"
             priority
             quality={100}
             fill
             alt="photo"
-            className="object-contain rounded-full"
+            className="object-cover rounded-full"
           />
-        </motion.div>
+
+        {/* Orbiting ring */}
+        <motion.div
+          className="absolute inset-0 rounded-full border-2 border-accent/40"
+          animate={{
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+          }}
+          style={{
+            borderStyle: "solid",
+          }}
+        />
       </motion.div>
     </div>
   );
