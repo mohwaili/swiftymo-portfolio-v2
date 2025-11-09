@@ -56,7 +56,7 @@ jobs:
         uses: Burnett01/rsync-deployments@7.1.0
         with:
           switches: -avzr --delete
-          path: ".next public package.json package-lock.json next.config.mjs .npmrc"
+          path: ".next public package.json package-lock.json src next.config.ts tsconfig.json tailwind.config.ts postcss.config.mjs components.json"
           remote_path: "/swiftymo-website"
           remote_host: ${{ secrets.EC2_FRONTEND_HOST }}
           remote_user: ubuntu
