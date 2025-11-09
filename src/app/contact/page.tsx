@@ -15,37 +15,20 @@ import {
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
-const info = [
-  {
-    icon: <FaPhoneAlt />,
-    title: "Phone",
-    description: "+31 636 52 87 11",
-  },
-  {
-    icon: <FaEnvelope />,
-    title: "Email",
-    description: "info@swiftymo.com",
-  },
-  {
-    icon: <FaMapMarkerAlt />,
-    title: "Address",
-    description: "Lover 162A, 7623 PK Borne",
-  },
-];
-
-
-export default function page() {
+export default async function page() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const response = await fetch(`${apiUrl}/api/contact`);
+  const data = await response.json();
+  const { phone, email, address, form_title, form_description } = data.data;
   return (
     <section className="py-6">
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
-
           <div className="xl:w-[54%] order-2 xl:order-none">
             <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
-              <h3 className="text-4xl text-accent">Let's work together</h3>
+              <h3 className="text-4xl text-accent">{form_title}</h3>
               <p className="text-white/60">
-                I'm always open to new opportunities. If you have any questions
-                or just want to say hi, please feel free to contact me.
+                {form_description}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input type="firstname" placeholder="Firstname" />
@@ -78,17 +61,33 @@ export default function page() {
 
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
             <ul className="flex flex-col gap-10">
-              {info.map((item, index) => (
-                <li key={index} className="flex items-center gap-6">
-                  <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
-                    <div className="text-[28px]">{item.icon}</div>
-                  </div>
-                  <div className="flex-1">
-                      <p className="text-white/60">{item.title}</p>
-                      <h3 className="text-xl">{item.description}</h3>
-                  </div>
-                </li>
-              ))}
+              <li className="flex items-center gap-6">
+                <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
+                  <div className="text-[28px]"><FaPhoneAlt /></div>
+                </div>
+                <div className="flex-1">
+                  <p className="text-white/60">Phone</p>
+                  <h3 className="text-xl">{phone}</h3>
+                </div>
+              </li>
+              <li className="flex items-center gap-6">
+                <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
+                  <div className="text-[28px]"><FaEnvelope /></div>
+                </div>
+                <div className="flex-1">
+                  <p className="text-white/60">Email</p>
+                  <h3 className="text-xl">{email}</h3>
+                </div>
+              </li>
+              <li className="flex items-center gap-6">
+                <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
+                  <div className="text-[28px]"><FaMapMarkerAlt /></div>
+                </div>
+                <div className="flex-1">
+                  <p className="text-white/60">Address</p>
+                  <h3 className="text-xl">{address}</h3>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
