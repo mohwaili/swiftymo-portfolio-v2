@@ -3,8 +3,34 @@ import { Button } from "@/components/ui/button";
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
+import { Metadata } from "next";
 
 export const revalidate = 0;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const response = await fetch(`${apiUrl}/api/start-page`);
+  const data = await response.json();
+  const { description } = data.data;
+
+  return {
+    title: "Mohammed Al Waili - Senior Software Engineer",
+    description: description || "Senior Software Engineer specializing in App & Web Development. Expert in Swift, Kotlin, TypeScript, and modern frameworks.",
+    openGraph: {
+      title: "Mohammed Al Waili - Senior Software Engineer",
+      description: description || "Senior Software Engineer specializing in App & Web Development",
+      type: "website",
+      locale: "en_US",
+      siteName: "Swiftymo Portfolio",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Mohammed Al Waili - Senior Software Engineer",
+      description: description || "Senior Software Engineer specializing in App & Web Development",
+    },
+    keywords: ["Software Engineer", "Mobile Development", "Web Development", "Swift", "Kotlin", "TypeScript", "React", "Next.js"],
+  };
+}
 
 export default async function Home() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;

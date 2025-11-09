@@ -1,7 +1,25 @@
 
 import React from "react";
+import { Metadata } from "next";
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: "Services - Mohammed Al Waili",
+  description: "Professional software development services including mobile app development, web development, consulting, and technical solutions.",
+  openGraph: {
+    title: "Services - Mohammed Al Waili",
+    description: "Professional software development services including mobile app development, web development, and consulting",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Services - Mohammed Al Waili",
+    description: "Professional software development services",
+  },
+  keywords: ["Software Development Services", "Mobile App Development", "Web Development", "Technical Consulting", "iOS Development", "Android Development"],
+};
+
 interface Service {
   title: string;
   description: string;

@@ -3,8 +3,25 @@
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import ContactForm from "./ContactForm";
+import { Metadata } from "next";
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: "Contact - Mohammed Al Waili",
+  description: "Get in touch for software development projects, consulting, or collaboration opportunities. Available for mobile and web development work.",
+  openGraph: {
+    title: "Contact - Mohammed Al Waili",
+    description: "Get in touch for software development projects and collaboration opportunities",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Contact - Mohammed Al Waili",
+    description: "Get in touch for software development projects",
+  },
+  keywords: ["Contact", "Hire Developer", "Software Development", "Freelance", "Consulting", "Collaboration"],
+};
 
 export default async function page() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;

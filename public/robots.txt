@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin or private pages (add as needed)
+# Disallow: /admin
+
+# Sitemap location
+Sitemap: https://swiftymo.com/sitemap.xml
+
