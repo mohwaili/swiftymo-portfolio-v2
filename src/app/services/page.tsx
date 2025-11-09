@@ -1,32 +1,7 @@
 
 import React from "react";
-import { BsArrowDownRight } from "react-icons/bs";
-import Link from "next/link";
 
-const services = [
-  {
-    num: "01",
-    title: "Mobile Development",
-    description:
-      "I build modern, user-friendly applications using Swift, SwiftUI, and UIKit. I enjoy solving complex problems with clean, maintainable code and places strong value on testing to ensure quality.",
-    link: "/services/mobile-development",
-  },
-  {
-    num: "02",
-    title: "Web Development",
-    description:
-      "I create beautiful and functional websites using modern technologies and best practices.",
-    link: "/services/web-development",
-  },
-  {
-    num: "03",
-    title: "Deployment",
-    description:
-      "I deploy your mobile apps to the App Store and TestFlight and web apps to the cloud using modern technologies like AWS.",
-    link: "/services/deployment",
-  },
-];
-
+export const revalidate = 0;
 interface Service {
   title: string;
   description: string;

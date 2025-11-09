@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
@@ -40,7 +40,7 @@ export default function Nav() {
     }, []);
 
     // Function to update bird position relative to first nav item
-    const updateBirdPosition = () => {
+    const updateBirdPosition = useCallback(() => {
         const activeIndex = links.findIndex(link => link.path === pathname);
         const targetIndex = activeIndex !== -1 ? activeIndex : 0;
         
@@ -56,7 +56,7 @@ export default function Nav() {
                 y: -40,
             });
         }
-    };
+    }, [pathname]);
 
     // Initialize bird position on mount
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function Nav() {
                 setIsInitialized(true);
             });
         }
-    }, [isMounted, isInitialized, pathname]);
+    }, [isMounted, isInitialized, pathname, updateBirdPosition]);
 
     // Handle path changes
     useEffect(() => {
@@ -93,7 +93,7 @@ export default function Nav() {
                 }
             };
         }
-    }, [pathname, prevPath, isInitialized]);
+    }, [pathname, prevPath, isInitialized, updateBirdPosition]);
 
   return (
     <nav className='flex gap-8 relative'>

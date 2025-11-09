@@ -1,6 +1,8 @@
 import React from "react";
 import ResumeTabs from "./ResumeTabs";
 
+export const revalidate = 0;
+
 export default async function Page() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await fetch(`${apiUrl}/api/resume`);

@@ -4,6 +4,8 @@ import Social from "@/components/Social";
 import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
 
+export const revalidate = 0;
+
 export default async function Home() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const response = await fetch(`${apiUrl}/api/start-page`);
@@ -17,7 +19,7 @@ export default async function Home() {
           <div className="text-center xl:text-left order-2 xl:order-none">
             <span className="text-xl">Software Engineer</span>
             <h1 className="h1 mb-6">
-              Hello I'm <br />
+              Hello I&apos;m <br />
               <span className="text-accent">Mohammed Al Waili</span>
             </h1>
             <p className="max-w-[800px] mb-9 text-white/80">

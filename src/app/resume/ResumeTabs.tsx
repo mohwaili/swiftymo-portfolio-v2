@@ -24,7 +24,7 @@ import * as GrIcons from "react-icons/gr";
 const getIconComponent = (iconName: string): React.ElementType | null => {
   // Try different icon libraries
   const allIcons = { ...FaIcons, ...Fa6Icons, ...SiIcons, ...DiIcons, ...RiIcons, ...GrIcons };
-  return (allIcons as any)[iconName] || null;
+  return (allIcons as Record<string, React.ElementType>)[iconName] || null;
 };
 
 export interface Experience {

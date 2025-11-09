@@ -1,6 +1,8 @@
 import React from 'react'
 import ProjectsCarousel from './ProjectsCarousel';
 
+export const revalidate = 0;
+
 export interface ImageModel {
   url: string;
   alternativeText: string;
@@ -13,11 +15,19 @@ export interface Project {
   url?: string;
 }
 
+interface ApiProjectItem {
+  title: string;
+  description: string;
+  stack: string[];
+  image: ImageModel;
+  url?: string;
+}
+
 export default async function Page() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await fetch(`${apiUrl}/api/work`);
   const data = await response.json();
-  const projects: Project[] = data.data.items.map((item: any) => {
+  const projects: Project[] = data.data.items.map((item: ApiProjectItem) => {
     return {
       title: item.title,
       description: item.description,
