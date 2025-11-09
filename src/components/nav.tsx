@@ -4,7 +4,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
-import SwiftBirdLogo from './SwiftBirdLogo'
 
 const links = [
     {
@@ -22,10 +21,6 @@ const links = [
     {
         name: 'work',
         path: '/work'
-    },
-    {
-        name: 'contact',
-        path: '/contact'
     }
 ]
 
@@ -137,13 +132,6 @@ export default function Nav() {
             ease: [0.34, 1.56, 0.64, 1],
           }}
         >
-            <SwiftBirdLogo 
-              width="40px" 
-              height="40px" 
-              gradientId="swift-gradient-nav"
-              animate={true}
-              isAnimating={isAnimating}
-            />
           </motion.div>
     </nav>
   )

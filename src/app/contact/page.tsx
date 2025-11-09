@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,18 +33,10 @@ const info = [
   },
 ];
 
-import { motion } from "framer-motion";
 
 export default function page() {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { delay: 0.4, duration: 0.4, ease: "easeIn" },
-      }}
-      className="py-6"
-    >
+    <section className="py-6">
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
 
@@ -67,7 +57,7 @@ export default function page() {
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#27272c]">
                   <SelectGroup>
                     <SelectLabel>Select a service</SelectLabel>
                     <SelectItem value="est">Web Development</SelectItem>
@@ -103,6 +93,6 @@ export default function page() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
