@@ -66,16 +66,6 @@ export default function ResumeTabs({ experience, education, skills, info }: { ex
         <TabsContent value="experience" className="w-full">
           <div className="flex flex-col gap-[30px] text-center xl:text-left">
             <h3 className="text-4xl font-bold">My Experience</h3>
-            <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
-              Throughout my career as a software engineer, I have acquired
-              extensive experience working with leading companies on complex and
-              innovative projects. My roles have allowed me to develop and
-              deliver scalable solutions, lead technical teams, and contribute
-              to products that impact thousands of users. I am passionate about
-              leveraging modern technologies and my expertise to solve
-              real-world problems and drive continuous improvement in every
-              environment I join.
-            </p>
             <ScrollArea className="h-[400px]">
               <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                 {experience.map((item: Experience, index: number) => (
@@ -102,22 +92,22 @@ export default function ResumeTabs({ experience, education, skills, info }: { ex
                 ))}
               </ul>
             </ScrollArea>
+            <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
+              Throughout my career as a software engineer, I have acquired
+              extensive experience working with leading companies on complex and
+              innovative projects. My roles have allowed me to develop and
+              deliver scalable solutions, lead technical teams, and contribute
+              to products that impact thousands of users. I am passionate about
+              leveraging modern technologies and my expertise to solve
+              real-world problems and drive continuous improvement in every
+              environment I join.
+            </p>
           </div>
         </TabsContent>
         {/* Education */}
         <TabsContent value="education" className="w-full">
           <div className="flex flex-col gap-[30px] text-center xl:text-left">
             <h3 className="text-4xl font-bold">My Education</h3>
-            <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
-              During my academic journey at the University of Amsterdam, I
-              developed a strong foundation in computer science principles and
-              honed my problem-solving skills through rigorous coursework and
-              hands-on projects. My education empowered me to work with diverse
-              programming languages, data structures, and system architectures,
-              fostering both analytical thinking and practical expertise. The
-              experiences and knowledge I gained continue to shape my approach
-              to building efficient and impactful technology solutions.
-            </p>
             <ScrollArea className="h-[400px]">
               <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                 {education.map((item: Education, index: number) => (
@@ -137,6 +127,16 @@ export default function ResumeTabs({ experience, education, skills, info }: { ex
                 ))}
               </ul>
             </ScrollArea>
+            <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
+              During my journey at the Avans University of Applied Sciences, I
+              developed a strong foundation in computer science principles and
+              honed my problem-solving skills through rigorous coursework and
+              hands-on projects. My education empowered me to work with diverse
+              programming languages, data structures, and system architectures,
+              fostering both analytical thinking and practical expertise. The
+              experiences and knowledge I gained continue to shape my approach
+              to building efficient and impactful technology solutions.
+            </p>
           </div>
         </TabsContent>
         {/* Skills */}
@@ -144,18 +144,6 @@ export default function ResumeTabs({ experience, education, skills, info }: { ex
           <div className="flex flex-col gap-[30px]">
             <div className="flex flex-col gap-[30px] text-center xl:text-left">
               <h3 className="text-4xl font-bold">My Skills</h3>
-              <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
-                I have developed a broad and versatile skill set as a software
-                engineer, mastering both frontend and backend technologies. My
-                proficiency in languages such as Swift, Kotlin, and TypeScript
-                enables me to create performant applications across multiple
-                platforms. I am adept at using modern frameworks like SwiftUI
-                and Next.js, and have hands-on experience implementing scalable
-                solutions with AWS and integrating systems with GraphQL and
-                Strapi. My continuous pursuit of learning new tools and
-                technologies ensures I deliver efficient and innovative results
-                in every project.
-              </p>
             </div>
             <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-[30px]">
               {skills.map((skill: Skill, index: number) => {
@@ -178,6 +166,18 @@ export default function ResumeTabs({ experience, education, skills, info }: { ex
                 );
               })}
             </ul>
+            <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
+                I have developed a broad and versatile skill set as a software
+                engineer, mastering both frontend and backend technologies. My
+                proficiency in languages such as Swift, Kotlin, and TypeScript
+                enables me to create performant applications across multiple
+                platforms. I am adept at using modern frameworks like SwiftUI
+                and Next.js, and have hands-on experience implementing scalable
+                solutions with AWS and integrating systems with GraphQL and
+                Strapi. My continuous pursuit of learning new tools and
+                technologies ensures I deliver efficient and innovative results
+                in every project.
+              </p>
           </div>
         </TabsContent>
         {/* About me */}
